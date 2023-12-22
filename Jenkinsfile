@@ -8,7 +8,7 @@ pipeline {
             steps {
                sh 'node --version'
                 echo 'Testing is running'
-                // echo "nice to have ${DOCKER_HUB_CREDENTIALS}"
+                echo "nice to have ${DOCKER_HUB_CREDENTIALS_USR}"
                 sh 'npm install'
             }
         }
