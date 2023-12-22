@@ -8,7 +8,7 @@ pipeline {
             steps {
                sh 'node --version'
                 echo 'Testing is running'
-                echo "nice to have ${DOCKER_HUB_CREDENTIALS}"
+                // echo "nice to have ${DOCKER_HUB_CREDENTIALS}"
                 sh 'npm install'
             }
         }
@@ -26,8 +26,7 @@ pipeline {
         }
         stage('Deploy artifact to docker-hub') {
             steps {
-                withCredentials([string(credentialsId: 'docker-hub-pwd', variable: 'dockerhubpwd')])
-                sh 'docker login -u demmarss -p ${dockerhubpwd}'
+                sh 'docker login -u demmarss -p ${DOCKER_HUB_CREDENTIALS_PSW}'
                 echo 'Deployment is running'
             }
         }
