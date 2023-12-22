@@ -1,12 +1,14 @@
 pipeline {
    agent { docker { image 'node:20.10.0-alpine3.19' } }
-    DOCKER-HUB-CREDENTIALS = credentials('docker-hub')
+    environment { 
+        DOCKER_HUB_CREDENTIALS = credentials('docker-hub')
+    }
     stages {
         stage('Install Dependencies') {
             steps {
                sh 'node --version'
                 echo 'Testing is running'
-                echo $DOCKER-HUB-CREDENTIALS
+                echo $DOCKER_HUB_CREDENTIALS_PWD
                 sh 'npm install'
             }
         }
