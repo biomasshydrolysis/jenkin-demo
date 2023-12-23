@@ -31,8 +31,8 @@ pipeline {
             steps {
                 echo 'Building our docker image is running'                
                 dockerTool('Docker') {
-                   echo 'Docker should be on"
-                    sh 'docker ps'
+                  echo 'Docker should be on'
+                  sh 'docker ps'
                 }
                 
             }
