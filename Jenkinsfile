@@ -32,8 +32,10 @@ pipeline {
         }
          stage('Building our image') {
             steps {
-                echo 'Building our docker image is running.......'                
-                sh 'docker ps'
+                echo 'Building our docker image is running.......'
+                sh 'git -version'
+                sh 'git log --oneline'
+               
             }
         }
         stage('Deploy our image') {
