@@ -1,7 +1,11 @@
 pipeline {
    agent { docker { image 'node:20.10.0-alpine3.19' } }
+   docker push demmarss/jenkins-demo:tagname
     environment { 
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub')
+        registry = "demmarss/jenkins-demo"
+        registryCredential = 'dockerhub_id'
+        dockerImage = ''
     }
     stages {
         stage('Install Dependencies') {
@@ -24,11 +28,28 @@ pipeline {
                 sh 'npm run test'
             }
         }
-        stage('Deploy artifact to docker-hub') {
+         stage('Building our image') {
             steps {
-                sh 'docker login -u demmarss -p ${DOCKER_HUB_CREDENTIALS_PSW}'
-                echo 'Deployment is running'
+                echo 'Testing is running'
+                sh 'npm run test'
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
             }
         }
+        stage('Deploy our image') {
+            steps{
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                    }
+                }
+            }
+        }
+       stage('Cleaning up') {
+            steps{
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
+        } 
     }
 }
