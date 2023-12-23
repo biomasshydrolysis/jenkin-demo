@@ -29,11 +29,13 @@ pipeline {
         }
          stage('Building our image') {
             steps {
-                echo 'Testing is running'
-                sh 'npm run test'
-                script {
+                echo 'Building our docker image is running'
+                dockerTool('Docker'){
+script {
                     dockerImage = docker.build registry + ":$BUILD_NUMBER"
                 }
+                }
+                
             }
         }
         stage('Deploy our image') {
