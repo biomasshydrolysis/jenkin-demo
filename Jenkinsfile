@@ -7,7 +7,7 @@ pipeline {
         dockerImage = ''
     }
    tools {
-      dockerTool('Docker')
+      dockerTool 'Docker' 
    }
     stages {
         stage('Install Dependencies') {
