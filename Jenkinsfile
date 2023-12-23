@@ -29,11 +29,11 @@ pipeline {
         }
          stage('Building our image') {
             steps {
-                echo 'Building our docker image is running'
-                dockerTool('Docker'){
-script {
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                }
+                echo 'Building our docker image is running'                
+                dockerTool('Docker') {
+                    script {
+                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                    }
                 }
                 
             }
