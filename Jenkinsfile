@@ -1,6 +1,5 @@
 pipeline {
    agent { docker { image 'node:20.10.0-alpine3.19' } }
-   docker push demmarss/jenkins-demo:tagname
     environment { 
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub')
         registry = "demmarss/jenkins-demo"
