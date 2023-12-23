@@ -6,6 +6,9 @@ pipeline {
         registryCredential = 'dockerhub_id'
         dockerImage = ''
     }
+   tools {
+      dockerTool('Docker')
+   }
     stages {
         stage('Install Dependencies') {
             steps {
@@ -29,12 +32,8 @@ pipeline {
         }
          stage('Building our image') {
             steps {
-                echo 'Building our docker image is running'                
-                dockerTool('Docker') {
-                  echo 'Docker should be on'
-                  sh 'docker ps'
-                }
-                
+                echo 'Building our docker image is running.......'                
+                sh 'docker ps'
             }
         }
         stage('Deploy our image') {
