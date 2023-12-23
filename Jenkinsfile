@@ -31,9 +31,8 @@ pipeline {
             steps {
                 echo 'Building our docker image is running'                
                 dockerTool('Docker') {
-                    script {
-                        dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                    }
+                   echo 'Docker should be on"
+                    sh 'docker ps'
                 }
                 
             }
