@@ -3,8 +3,6 @@ pipeline {
     environment { 
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub')
         registry = "demmarss/jenkins-demo"
-        registryCredential = 'dockerhub_id'
-        dockerImage = ''
     }
     tools {
         dockerTool 'Docker'
@@ -24,16 +22,12 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing is running'
                 sh 'npm run test'   
             }
         }
-         stage('Building our image') {
-            steps {
-                echo 'Building our docker image is running'                
-                script {
-                        sh "docker build -t $registry:$BUILD_NUMBER ."
-                    }
+         stage('Build image') {
+            steps {             
+                sh "docker build -t $registry:$BUILD_NUMBER ."
             }
         }
         stage('Login to dockerhub') {
