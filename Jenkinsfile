@@ -15,7 +15,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 echo 'Testing is running'
-                echo "nice to have ${DOCKER_HUB_CREDENTIALS_PWD}"
+                echo "nice to have ${DOCKER_HUB_CREDENTIALS_USR}"
                 sh 'npm install'   
             }
         }
@@ -44,7 +44,7 @@ pipeline {
         }
         stage('Login in to docker hub') {
             steps{
-                sh 'docker login -u demmarss -p Sailors4519'
+                sh 'docker login -u demmarss -p ${DOCKER_HUB_CREDENTIALS_PSW}'
                 // script {
                 //     docker.withRegistry( '', registryCredential ) {
                 //     dockerImage.push()
