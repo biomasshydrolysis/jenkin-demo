@@ -42,6 +42,16 @@ pipeline {
                 
             }
         }
+        stage('Login in to docker hub') {
+            steps{
+                sh 'docker login -u demmarss -p ${DOCKER_HUB_CREDENTIALS_USR}'
+                // script {
+                //     docker.withRegistry( '', registryCredential ) {
+                //     dockerImage.push()
+                //     }
+                // }
+            }
+        }
         stage('Deploy our image') {
             steps{
                 script {
