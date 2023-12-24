@@ -2,7 +2,7 @@ pipeline {
    agent any
     environment { 
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub')
-        registry = "demmarss/jenkins-demo"
+        registry = "jenkins-demo"
         registryCredential = 'dockerhub_id'
         dockerImage = ''
     }
