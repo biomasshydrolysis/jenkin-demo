@@ -2,7 +2,7 @@ pipeline {
    agent any
     environment { 
         DOCKER_HUB_CREDENTIALS = credentials('docker-hub')
-        registry = "jenkins-demo"
+        registry = "demmarss/jenkins-demo"
         registryCredential = 'dockerhub_id'
         dockerImage = ''
     }
@@ -67,7 +67,7 @@ pipeline {
         }
        stage('Cleaning up') {
             steps{
-                sh "docker rmi demmarss/$registry:$BUILD_NUMBER"
+                sh "docker rmi $registry:$BUILD_NUMBER"
             }
         } 
     }
