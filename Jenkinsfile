@@ -32,7 +32,7 @@ pipeline {
             steps {
                 echo 'Building our docker image is running'                
                 script {
-                        sh "docker build -t $registry:$BUILD_NUMBER"
+                        sh "docker build -t $registry:$BUILD_NUMBER ."
                     }
             }
         }
