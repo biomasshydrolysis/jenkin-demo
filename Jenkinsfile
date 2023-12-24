@@ -44,8 +44,8 @@ pipeline {
         }
         stage('Login in to docker hub') {
             steps{
-                // sh 'docker login -u demmarss -p ${DOCKER_HUB_CREDENTIALS_PSW}'
-                sh 'docker login -u demmarss -p dckr_pat_sfAI4XFg0NvDqlSMLtlVdOh546M'
+                sh 'docker login -u demmarss -p ${DOCKER_HUB_CREDENTIALS_PSW}'
+                // sh 'docker login -u demmarss -p dckr_pat_sfAI4XFg0NvDqlSMLtlVdOh546M'
                 // script {
                 //     docker.withRegistry( '', registryCredential ) {
                 //     dockerImage.push()
@@ -55,11 +55,14 @@ pipeline {
         }
         stage('Deploy our image') {
             steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                    dockerImage.push()
-                    }
-                }
+                sh 'ls'
+                echo '${registry}:${BUILD_NUMBER}'
+                sh 'docker push ${registry}:${BUILD_NUMBER}'
+                // script {
+                //     docker.withRegistry( '', registryCredential ) {
+                //     dockerImage.push()
+                //     }
+                // }
             }
         }
        stage('Cleaning up') {
